@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+.alignChildren {
+    font-size: 0;
+}
+
+.alignChildren > * {
+    display: inline-block;
+    font-size: medium;
+    vertical-align: top;
+}
+.gitTit {
+	display: block;
+	background-color: red;
+	width: 80%;
+	height: 100px;
+	margin:0 5%;
+}
+
+#container {
+	width: 80%;
+	margin: .1% 5%;
+}
+
+.col {
+	border: 2px solid black;
+	height: 100vh;
+	display: inline-block;
+
+}
+.right {
+	background-color: blue;
+	width:60%;
+	margin-left: .5%;
+}
+
+.left {
+	background: green;
+	width: 39%;
+	margin-right: .5%;
+}
+
+img {
+	width: 100%;
+	box-shadow: 20px 20px grey;
+}
+
+
+li {
+	border: 2px solid black;
+	font-size: 2em;
+	color:black;
+	list-style: none;
+	width: 100%;
+	display: block;
+}
+
+
+@media screen and (max-width: 768px) {
+
+  #container {
+  	display: block;
+    width: 100%;
+  }
+}
