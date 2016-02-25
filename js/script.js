@@ -1,7 +1,7 @@
 console.log($)
 
 // var apiKey = ''
-var profileURL = 'https://api.github.com/users/boazblake'
+var profileURL = 'https://api.github.com/users/t3patterson'
 var reposURL = 'https://api.github.com/users/boazblake/repos'
 
 // var websiteURL  = [profileURL, reposURL]
@@ -13,12 +13,12 @@ var promiseRepos = $.getJSON(reposURL)
 
 var handleDataProfile = function(jsonProfileData) {
     // console.log(jsonProfileData)
-    var domString = ''
+    var domPRofileString = ''
     var profileObject = jsonProfileData
-    domString += profileToHTML(profileObject)
+    domPRofileString += profileToHTML(profileObject)
 
-    var containerEl = document.querySelector('.left')
-    containerEl.innerHTML = domString
+    var profileContainer = document.querySelector('.left')
+    profileContainer.innerHTML = domPRofileString
 }
 
 //Profile Repos Function
@@ -33,7 +33,7 @@ var handleDataRepos = function(jasonDataRepo) {
         issuesCountArray[i] = jasonDataRepo[i].open_issues_count
 
     }
-    // console.log(gitURLArray)
+    console.log(gitURLArray)
     // console.log(reposNameArray)
     // console.log(issuesCountArray)
 
@@ -45,19 +45,12 @@ var handleDataRepos = function(jasonDataRepo) {
             repoObject.gitURL = gitURLArray[i]
             repoObject.issuesNumber = issuesCountArray[i]
             console.log(repoObject.gitName)
-        }
+            domRepoString += repoToHTML(repoArray)
 
-        
+        var repoContainer = document.querySelector('.right')
+   	 	repoContainer.innerHTML = domRepoString
+        }   
     }
-
-
-
-
-
-    // domString += repoToHTML(repoArray)
-
-    // var containerEl = document.querySelector('.right')
-    // containerEl.innerHTML = domString
 }
 
 
@@ -74,7 +67,7 @@ var profileToHTML = function(profileObject) {
     var bio = profileObject.bio
     var location = profileObject.location
 
-    var newProfileToDom = '<div class="imgContainer"><img src="' + avatarImgSrc + '"></div>'
+    var newProfileToDom = '<div class="imgContainer"><img class="profilePic" src="' + avatarImgSrc + '"></div>'
     newProfileToDom += '<ul class="profileListContainer"><li class="profileName">' + name + '</li>'
     newProfileToDom += '<li class="profileBlog">' + blog + '</li>'
     newProfileToDom += '<li class="profileHireable">' + hire + '</li>'
@@ -85,13 +78,12 @@ var profileToHTML = function(profileObject) {
     return newProfileToDom
 }
 
-
 //Profile Repo To Dom
 
 
-
-
-
+var repoToHTML = function(gitURLArray) {
+console.log(gitURLArray)
+}
 
 
 
