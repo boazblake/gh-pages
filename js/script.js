@@ -23,12 +23,12 @@ var containerEl = document.querySelector('.left')
 }
 
 var profileToHTML = function (profileObject) {
-	// console.log(profileObject)
+	console.log(profileObject)
 	var avatarImgSrc = profileObject.avatar_url
-	console.log(avatarImgSrc)
+	// console.log(avatarImgSrc)
 	var name = profileObject.name
-	console.log(name)
-
+	// console.log(name)
+	var email = profileObject.email 
 	var blog = profileObject.blog
 	var hire = profileObject.hireable 
 	var bio = profileObject.bio
@@ -37,6 +37,7 @@ var profileToHTML = function (profileObject) {
 	 newProfileToDom +='<ul class="profileListContainer"><li class="profileName">' + name + '</li>'
 	 newProfileToDom += '<li class="profileBlog">' + blog + '</li>'
 	 newProfileToDom += '<li class="profileHireable">' + hire + '</li>'
+	 newProfileToDom += '<li class="profileEmail">' + email + '</li>'
 	 newProfileToDom += '<li class="profileBio">' + bio + '</li></ul>'
 
 	return newProfileToDom
