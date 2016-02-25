@@ -1,13 +1,13 @@
 console.log($)
 
-// var apiKey = ''
-var profileURL = 'https://api.github.com/users/matthiasak'
+var apiKey = '?access_token=4ec2ce71fa46864e2eba86d05dd76f62a9e88d7b'
+var profileURL = 'https://api.github.com/users/boazblake'
 var reposURL = 'https://api.github.com/users/boazblake/repos'
 
 // var websiteURL  = [profileURL, reposURL]
 
-var promiseProfile = $.getJSON(profileURL)
-var promiseRepos = $.getJSON(reposURL)
+var promiseProfile = $.getJSON(profileURL+apiKey)
+var promiseRepos = $.getJSON(reposURL+apiKey)
 
 //Profile Data Function
 
@@ -16,42 +16,23 @@ var handleDataProfile = function(jsonProfileData) {
     var domPRofileString = ''
     var profileObject = jsonProfileData
     domPRofileString += profileToHTML(profileObject)
-
     var profileContainer = document.querySelector('.left')
     profileContainer.innerHTML = domPRofileString
 }
 
-//Profile Repos Function
+// Repos Data Function
 
 var handleDataRepos = function(jasonDataRepo) {
-    var gitURLArray = []
-    var reposNameArray = []
-    var issuesCountArray = []
+	// console.log(jasonDataRepo)
+    var domRepoString = ''
     for (var i = 0; i < jasonDataRepo.length; i++) {
-        reposNameArray[i] = jasonDataRepo[i].full_name
-        gitURLArray[i] = jasonDataRepo[i].git_url
-        issuesCountArray[i] = jasonDataRepo[i].open_issues_count
+    	domRepoString += jasonDataRepo[i].name + ' '
+    } 
+    domRepoHTML = repoToHTML(domRepoString)
+    var repoContainer = document.querySelector('.right')
+   	repoContainer.innerHTML = domRepoString
+}   
 
-    }
-    console.log(gitURLArray)
-    // console.log(reposNameArray)
-    // console.log(issuesCountArray)
-
-
-    var repoFunction = function(repoArray) {
-        var repoObject = {}
-        for (var i = 0; i < repoArray.length; i++) {
-            repoObject.gitName = reposNameArray[i]
-            repoObject.gitURL = gitURLArray[i]
-            repoObject.issuesNumber = issuesCountArray[i]
-            console.log(repoObject.gitName)
-            domRepoString += repoToHTML(repoArray)
-
-        var repoContainer = document.querySelector('.right')
-   	 	repoContainer.innerHTML = domRepoString
-        }   
-    }
-}
 
 
 
@@ -60,12 +41,15 @@ var handleDataRepos = function(jasonDataRepo) {
 var profileToHTML = function(profileObject) {
     // console.log(profileObject)
     var avatarImgSrc = profileObject.avatar_url
-    var name = profileObject.name
+    var name = profileObject.name 
     var email = profileObject.email
     var blog = profileObject.blog
     var hire = profileObject.hireable
     var bio = profileObject.bio
     var location = profileObject.location
+    if (profileObject.name === null) {
+    	location = ''
+    }
 
     var newProfileToDom = '<div class="imgContainer"><img class="profilePic" src="' + avatarImgSrc + '"></div>'
     newProfileToDom += '<ul class="profileListContainer"><li class="profileName">' + name + '</li>'
@@ -80,16 +64,12 @@ var profileToHTML = function(profileObject) {
 
 //Profile Repo To Dom
 
-
-var repoToHTML = function(gitURLArray) {
-console.log(gitURLArray)
+var repoToHTML = function(repoArray) {
+    console.log(repoArray)
 }
-
 
 
 
 
 promiseProfile.then(handleDataProfile)
 promiseRepos.then(handleDataRepos)
-
-console.log()

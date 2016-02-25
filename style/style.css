@@ -25,11 +25,13 @@ html {
 	line-height: 60px;
 	margin:0 5%;
 	color: white;
+	position: relative;
 }
 
 input.profileSearch {
-	position: absolute;
-	right:10px;
+	/*position: absolute;*/
+	margin-left:100px;
+	/*margin: auto;*/
 }
 
 
@@ -53,8 +55,7 @@ h2 {
 	width: 70px;
     position: absolute;
     left: 10%;
-    top: 62px;
-    z-index: 0;
+    bottom: 0;
 }
 
 
@@ -81,10 +82,11 @@ h2 {
 }
 
 .imgContainer {
-	height: 230px;
 	margin: 0 05%;
-	width: 90%;
+	width: 100%;
 	box-shadow: 0 8px 30px -6px black;
+	border-radius: 30px;
+	overflow: hidden;
 }
 
 .profilePic {
