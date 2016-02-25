@@ -27,6 +27,12 @@ html {
 	color: white;
 }
 
+input.profileSearch {
+	position: absolute;
+	right:10px;
+}
+
+
 h1 {
 	padding: 0.5% 1%;
 	font-size: 3em;
@@ -53,14 +59,13 @@ h2 {
 
 
 #container {
-	width: 80%;
+	width: 100%;
 	margin: .1% 5%;
 }
 
 .col {
 	border: 2px solid black;
 	height: 100vh;
-	display: inline-block;
 
 }
 .right {
@@ -85,6 +90,7 @@ h2 {
 .profilePic {
 	width: 100%;
 	margin: 0 auto;
+	border:2px solid black;
 
 }
 

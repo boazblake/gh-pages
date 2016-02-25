@@ -1,7 +1,7 @@
 console.log($)
 
 // var apiKey = ''
-var profileURL = 'https://api.github.com/users/t3patterson'
+var profileURL = 'https://api.github.com/users/matthiasak'
 var reposURL = 'https://api.github.com/users/boazblake/repos'
 
 // var websiteURL  = [profileURL, reposURL]
