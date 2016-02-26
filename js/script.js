@@ -6,13 +6,13 @@ var reposURL = 'https://api.github.com/users/boazblake/repos'
 
 // var websiteURL  = [profileURL, reposURL]
 
-var promiseProfile = $.getJSON(profileURL+apiKey)
-var promiseRepos = $.getJSON(reposURL+apiKey)
+var promiseProfile = $.getJSON(profileURL)
+var promiseRepos = $.getJSON(reposURL)
 
 //Profile Data Function
 
 var handleDataProfile = function(jsonProfileData) {
-    // console.log(jsonProfileData)
+    console.log(jsonProfileData)
     var domPRofileString = ''
     var profileObject = jsonProfileData
     domPRofileString += profileToHTML(profileObject)
@@ -26,9 +26,10 @@ var handleDataRepos = function(jasonDataRepo) {
 	// console.log(jasonDataRepo)
     var domRepoString = ''
     for (var i = 0; i < jasonDataRepo.length; i++) {
-    	domRepoString += jasonDataRepo[i].name + ' '
+    	domRepoString += '<a><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>'+ jasonDataRepo[i].url  +'<br> Number Of Open Issues:     '+ jasonDataRepo[i].open_issues_count+'</div></a>'
+    	// console.log(domRepoString)
     } 
-    domRepoHTML = repoToHTML(domRepoString)
+    // domRepoHTML = repoToHTML(domRepoString)
     var repoContainer = document.querySelector('.right')
    	repoContainer.innerHTML = domRepoString
 }   
@@ -53,21 +54,14 @@ var profileToHTML = function(profileObject) {
 
     var newProfileToDom = '<div class="imgContainer"><img class="profilePic" src="' + avatarImgSrc + '"></div>'
     newProfileToDom += '<ul class="profileListContainer"><li class="profileName">' + name + '</li>'
-    newProfileToDom += '<li class="profileBlog">' + blog + '</li>'
-    newProfileToDom += '<li class="profileHireable">' + hire + '</li>'
     newProfileToDom += '<li class="profileEmail">' + email + '</li>'
-    newProfileToDom += '<li class="profileLocation">' + location + '</li>'
-    newProfileToDom += '<li class="profileBio">' + bio + '</li></ul>'
+    newProfileToDom += '<li class="profilelocation">' + location + '</li></ul>'
+    newProfileToDom += '<div class="profileBlog box">' + blog + '</div>'
+    newProfileToDom += '<div class="profileBio box">' + bio + '</div>'
+    newProfileToDom += '<div class="profileHireable box">' + hire + '</div>'
 
     return newProfileToDom
 }
-
-//Profile Repo To Dom
-
-var repoToHTML = function(repoArray) {
-    console.log(repoArray)
-}
-
 
 
 

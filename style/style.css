@@ -17,15 +17,16 @@ html {
 }
 .gitTit {
 	display: block;
-	background: url(https://www.ziprealty.com/blog/sites/default/files/HoustonImg.jpg);
+	background: url('https://c2.staticflickr.com/4/3142/2281234952_3aebe58d96_b.jpg');
 	background-size: 100%;
 	background-position: 20% 40%;
 	/*background-color: #39474E;*/
-	width: 100%;
+	width: 90%;
 	line-height: 60px;
-	margin:0 5%;
+	margin: auto;
 	color: white;
 	position: relative;
+	border-radius: 5px;
 }
 
 input.profileSearch {
@@ -57,7 +58,11 @@ h2 {
     left: 10%;
     bottom: 0;
 }
+.backgroundGradient {
+	background-color: #39474E;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2));
 
+}
 
 #container {
 	width: 100%;
@@ -65,26 +70,19 @@ h2 {
 }
 
 .col {
-	border: 2px solid black;
 	height: 100vh;
 
 }
-.right {
-	background-color: blue;
-	width:60%;
-	margin-left: .5%;
-}
 
 .left {
-	background: #91877b;
+	/*background: #39474E;*/
 	width: 39%;
 	margin-right: .5%;
 }
 
 .imgContainer {
 	margin: 0 05%;
-	width: 100%;
-	box-shadow: 0 8px 30px -6px black;
+	width: 80%;
 	border-radius: 30px;
 	overflow: hidden;
 }
@@ -92,7 +90,9 @@ h2 {
 .profilePic {
 	width: 100%;
 	margin: 0 auto;
-	border:2px solid black;
+	/*border:2px solid black;*/
+	box-shadow: 0 8px 30px -6px #39474E;
+
 
 }
 
@@ -100,13 +100,13 @@ h2 {
 ul {
 	width:100%;
 	padding: 5px 10px;
-    background-color: #666666;
+    /*background-color: #39474E;*/
 
 }
 
 li {   
     background-color: black; 
-	border: 2px solid black;
+	border: rgba(255,255,255,0.5);
 	font-size: 1.2em;
 	list-style: none;
 	width: 100%;
@@ -127,6 +127,40 @@ li:hover {
     background-color: #33B5E5;
 }
 
+.box {
+	border-radius: 5px;
+	box-shadow: 0 8px 30px -6px #39474E;
+	margin: 0 5%;
+}
+
+
+
+.right {
+	width:60%;
+	overflow:scroll;
+}
+
+.repoList {
+	word-wrap: normal;
+	font-family: monospace;
+	font-size: 17px;
+	padding:0 0 10px 10px;
+	width: 100%;
+	color: #39474E;
+	margin: auto;
+	text-align: left;
+	border-radius: 10px;
+	margin-bottom: 5px;
+	box-shadow: 0 8px 30px -6px #39474E;
+
+}
+
+
+.animate-area	{ 
+	background-image: url(twitter-logo-bird.png), url(treehouseFrog.png), url(bg-clouds.png);
+	background-position: 20px -90px, 30px 80px, 0px 0px;
+	background-repeat: no-repeat, no-repeat, repeat-x;
+}
 
 
 
