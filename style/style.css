@@ -32,6 +32,7 @@ html {
 input {
 	position: absolute;
 	bottom: 15px;
+	left: 15px;
 	font-size: 20px;	
 }
 
@@ -68,9 +69,9 @@ h2 {
 	position: absolute;
 	width: 100px;
 	opacity: 0.6;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -30%);
+	right: 15px;
+	top: 0;
+	/*transform: translate(50%, 0);*/
 }
 
 
@@ -144,7 +145,6 @@ li:hover {
 	box-shadow: 0 8px 30px 0 #39474E;
 	margin: 0 5%;
 	font-size: 1em;
-	transition: 2s all ease;
 
 }
 
@@ -165,6 +165,11 @@ li:hover {
 	color: black;
 }
 
+p {
+	transition: 2s all ease;
+
+}
+
 .box .text {
 position:relative;
 left:0px;
@@ -173,6 +178,8 @@ display:none;
 
 .box:hover .text {
 display:inline-block;
+/*bottom: -100px;*/
+color: black;
 }
 
 

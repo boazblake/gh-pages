@@ -1,9 +1,9 @@
 console.log($)
 
-var apiKey = '?access_token=55193dec8572df5666f56ba2296ba32572f27099'
+var apiKey = '?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93'
 var profileURL = 'https://api.github.com/users/'
 var reposURL = 'https://api.github.com/users/'
-var userProfile = 'thuy-n3'
+var userProfile = 'matthiasak'
 var userRepo = userProfile + '/repos' 
 
 var promiseProfile = $.getJSON(profileURL + userProfile + apiKey)
@@ -57,8 +57,8 @@ var profileToHTML = function(profileObject) {
     newProfileToDom += '<ul class="profileListContainer"><li class="profileName"><h3>' + name + '</h3></li>'
     newProfileToDom += '<li class="profileEmail"><i class="fa fa-envelope"></i>' + email + '</li>'
     newProfileToDom += '<li class="profilelocation"><i class="fa fa-globe"></i>' + location + '</li></ul><br><br>'
-    newProfileToDom += '<div class="profileBlog box"><i class="fa fa-pencil-square-o"></i><p class="text">TEXT</p></div>'
-    newProfileToDom += '<div class="profileBio box">' + bio + '<p class="text">TEXT</p></div>'
+    newProfileToDom += '<div class="profileBlog box"><i class="fa fa-pencil-square-o"></i><p class="text">Blog</p></div>'
+    newProfileToDom += '<div class="profileBio box">' + bio + '<p class="text">Bio</p></div>'
     newProfileToDom += '<div class="profileHireable box"><i class="fa fa-code-fork"></i><p class="text">'+ hire +'</p></div>'
 
     return newProfileToDom
