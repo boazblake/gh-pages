@@ -1,6 +1,6 @@
 console.log($)
 
-var apiKey = '?access_token=5925f368be9ca667bdf8b3d31f48ecfb46594a35'
+var apiKey = ''
 var profileURL = 'https://api.github.com/users/'
 var reposURL = 'https://api.github.com/users/'
 var userProfile = 'boazblake'
