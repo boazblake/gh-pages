@@ -1,6 +1,6 @@
 console.log($)
 
-var apiKey = '?access_token=a0a06777c41c0b6d9ba092560d941c5818d2b4e0'
+var apiKey = '?access_token=fa667aa9332acd1c449858378e01b507cfce4d3c'
 var profileURL = 'https://api.github.com/users/'
 var reposURL = 'https://api.github.com/users/'
 var userProfile = 'thuy-n3'
