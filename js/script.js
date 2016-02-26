@@ -6,8 +6,8 @@ var reposURL = 'https://api.github.com/users/'
 var userProfile = 'matthiasak'
 var userRepo = userProfile + '/repos' 
 
-var promiseProfile = $.getJSON(profileURL + userProfile + apiKey)
-var promiseRepos = $.getJSON(reposURL + userRepo + apiKey)
+var promiseProfile = $.getJSON(profileURL + userProfile)
+var promiseRepos = $.getJSON(reposURL + userRepo)
 var inputEl = document.querySelector("input")
 var userInput = inputEl.value
 
