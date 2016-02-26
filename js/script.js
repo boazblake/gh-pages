@@ -60,22 +60,20 @@ var profileToHTML = function(profileObject) {
     return newProfileToDom
 }
 
-// search function
+// // search function
 
-var handleUserInput = function(keyEvent) {
-	if (event.keycode === 13) {
-		var searchInput = keyEvent.target
-		var textSearch = searchInput.value
-		searchInput.value = ''
-	}
-	var searchURL = 'https://api.github.com/search/'
-	var profileURL = searchURL + textSearch + apiKey
-	var userRepo = searchURL + textSearch + apiKey
-	console.log(profileURL)
-	console.log(userRepo)
-}
-
-
+// var handleUserInput = function(keyEvent) {
+// 	if (event.keycode === 13) {
+// 		var searchInput = keyEvent.target
+// 		var textSearch = searchInput.value
+// 		searchInput.value = ''
+// 	}
+// 	var searchURL = 'https://api.github.com/search/'
+// 	var profileURL = searchURL + textSearch + apiKey
+// 	var userRepo = searchURL + textSearch + apiKey
+// 	console.log(profileURL)
+// 	console.log(userRepo)
+// }
 
 
 
@@ -84,6 +82,8 @@ var handleUserInput = function(keyEvent) {
 
 
 
-searchInput.addEventListener('keydown', handleUserInput)
+
+
+// searchInput.addEventListener('keydown', handleUserInput)
 promiseProfile.then(handleDataProfile)
 promiseRepos.then(handleDataRepos)
