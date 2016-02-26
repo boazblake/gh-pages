@@ -1,10 +1,10 @@
 console.log($)
 
-var apiKey = ''
+var apiKey = '?access_token=a0a06777c41c0b6d9ba092560d941c5818d2b4e0'
 var profileURL = 'https://api.github.com/users/'
 var reposURL = 'https://api.github.com/users/'
-var userProfile = 'boazblake'
-var userRepo = userProfile + '/repos'
+var userProfile = 'thuy-n3'
+var userRepo = userProfile + '/repos' 
 
 var promiseProfile = $.getJSON(profileURL + userProfile + apiKey)
 var promiseRepos = $.getJSON(reposURL + userRepo + apiKey)
@@ -27,39 +27,39 @@ var handleDataProfile = function(jsonProfileData) {
 // Repos Data Function & sending to DOM
 
 var handleDataRepos = function(jasonDataRepo) {
-	console.log([jasonDataRepo])
+    // console.log([jasonDataRepo])
     var domRepoString = ''
     for (var i = 0; i < jasonDataRepo.length; i++) {
-    	domRepoString += '<a href="jasonDataRepo[i].url"><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>Number Of Open Issues:     '+ jasonDataRepo[i].open_issues_count+'</div></a>'
-    } 
+        domRepoString += '<a href="jasonDataRepo[i].url"><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>Number Of Open Issues:     ' + jasonDataRepo[i].open_issues_count + '</div></a>'
+    }
     var repoContainer = document.querySelector('.right')
-   	repoContainer.innerHTML = domRepoString
-    	console.log()
+    repoContainer.innerHTML = domRepoString
+        // console.log()
 
-}   
+}
 
 //Profile Data to DOM
 
 var profileToHTML = function(profileObject) {
     // console.log(profileObject)
     var avatarImgSrc = profileObject.avatar_url
-    var name = profileObject.name 
+    var name = profileObject.name
     var email = profileObject.email
     var blog = profileObject.blog
     var hire = profileObject.hireable
     var bio = profileObject.bio
     var location = profileObject.location
-    if (profileObject.name === null) {
-    	location = ''
-    }
+    if (bio === null) bio = ''
+    if (hire === true) hire = 'available for employment'
+    console.log(profileObject.hireable)
 
     var newProfileToDom = '<img class="profilePic" src="' + avatarImgSrc + '">'
     newProfileToDom += '<ul class="profileListContainer"><li class="profileName"><h3>' + name + '</h3></li>'
-    newProfileToDom += '<i class="fa fa-envelope"></i><li class="profileEmail">' + email + '</li>'
-    newProfileToDom += '<li class="profilelocation">' + location + '</li></ul><br><br>'
-    newProfileToDom += '<div class="profileBlog box">' + blog + '</div>'
-    newProfileToDom += '<div class="profileBio box">' + bio + '</div>'
-    newProfileToDom += '<div class="profileHireable box">' + hire + '</div>'
+    newProfileToDom += '<li class="profileEmail"><i class="fa fa-envelope"></i>' + email + '</li>'
+    newProfileToDom += '<li class="profilelocation"><i class="fa fa-globe"></i>' + location + '</li></ul><br><br>'
+    newProfileToDom += '<div class="profileBlog box"><i class="fa fa-pencil-square-o"></i><p class="text">TEXT</p></div>'
+    newProfileToDom += '<div class="profileBio box">' + bio + '<p class="text">TEXT</p></div>'
+    newProfileToDom += '<div class="profileHireable box"><i class="fa fa-code-fork"></i><p class="text">'+ hire +'</p></div>'
 
     return newProfileToDom
 }
@@ -67,23 +67,26 @@ var profileToHTML = function(profileObject) {
 // search function
 
 var newSearch = function(keyEvent) {
-		var inputEl = keyEvent.target
-	if (keyEvent.keycode === 13) {
-		var query = inputEl.value
-	console.log(inputEl.value)
+    var inputEl = keyEvent.target
 
-		inputEl.value = ''
+    if (keyEvent.keyCode === 13) {
+        var userLookupVal = inputEl.value
+            // console.log(inputEl.value)
+        // console.log(userLookupVal)
+        
+        inputEl.value = ''
+    
+	    var searchURL = 'https://api.github.com/users/'
+	    var profileURL = searchURL + userLookupVal + apiKey
+	    var repoURL = searchURL + userLookupVal + '/repos' + apiKey
+
+	    var promiseProfile = $.getJSON(profileURL)
+	    var promiseRepos = $.getJSON(repoURL)
+	    promiseProfile.then(handleDataProfile)
+	    promiseRepos.then(handleDataRepos)
+	        // console.log([handleDataProfileSearch])
+	        // console.log([handleDataReposSearch])
 	}
-	var searchURL = 'https://api.github.com/search/'
-	var profileURL = searchURL + query + apiKey
-	var repoURL = searchURL + query + '/repos' + apiKey
-
-	var promiseProfile = $.getJSON(profileURL)
-var promiseRepos = $.getJSON(repoURL)
-	promiseProfile.then(handleDataProfile)
-promiseRepos.then(handleDataRepos)
-	console.log([handleDataProfileSearch])
-	console.log([handleDataReposSearch])
 }
 
 
