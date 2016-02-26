@@ -62,10 +62,9 @@ var profileToHTML = function(profileObject) {
 
 // search function
 
-var search = function(event) {
-	var searchInput = event.target
-
+var handleUserInput = function(keyEvent) {
 	if (event.keycode === 13) {
+		var searchInput = keyEvent.target
 		var textSearch = searchInput.value
 		searchInput.value = ''
 	}
@@ -85,6 +84,6 @@ var search = function(event) {
 
 
 
-searchInput.addEventListener('keydown', search)
+searchInput.addEventListener('keydown', handleUserInput)
 promiseProfile.then(handleDataProfile)
 promiseRepos.then(handleDataRepos)
