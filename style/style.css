@@ -15,48 +15,58 @@ html {
     font-size: medium;
     vertical-align: top;
 }
+
 .gitTit {
 	display: block;
 	background: url('https://c2.staticflickr.com/4/3142/2281234952_3aebe58d96_b.jpg');
 	background-size: 100%;
 	background-position: 20% 40%;
-	/*background-color: #39474E;*/
 	width: 90%;
-	line-height: 60px;
+	height: 125px;
 	margin: auto;
 	color: white;
 	position: relative;
 	border-radius: 5px;
 }
 
-input.profileSearch {
-	/*position: absolute;*/
-	margin-left:100px;
-	/*margin: auto;*/
+input {
+	position: absolute;
+	bottom: 15px;
+	font-size: 20px;	
 }
 
 
 h1 {
-	padding: 0.5% 1%;
-	font-size: 3em;
+	position: absolute;
+	top: -50px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 4em;
 	text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
-	margin: 0;
-	z-index: 1;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.8) 0px 3px 3px;
 }
 
 h2 {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: inline-block;
 	padding-right:10%;
 	margin: 0 10px;
 	text-align: right;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
-	z-index: 1;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    /*color: transparent;*/
+    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
 }
 
 .logo{
 	width: 70px;
-    position: absolute;
-    left: 10%;
-    bottom: 0;
+
 }
 .backgroundGradient {
 	background-color: #39474E;
@@ -75,22 +85,15 @@ h2 {
 }
 
 .left {
-	/*background: #39474E;*/
-	width: 39%;
+	width: 29%;
 	margin-right: .5%;
 }
 
-.imgContainer {
-	margin: 0 05%;
-	width: 80%;
-	border-radius: 30px;
-	overflow: hidden;
-}
-
 .profilePic {
-	width: 100%;
-	margin: 0 auto;
-	/*border:2px solid black;*/
+	margin: 0 05%;
+	border-radius: 30px;
+	width: 80%;
+	margin: 15px auto;
 	box-shadow: 0 8px 30px -6px #39474E;
 
 
@@ -98,9 +101,9 @@ h2 {
 
 
 ul {
+	margin: 0;
 	width:100%;
 	padding: 5px 10px;
-    /*background-color: #39474E;*/
 
 }
 
@@ -110,7 +113,7 @@ li {
 	font-size: 1.2em;
 	list-style: none;
 	width: 100%;
-	line-height: 60px;
+	line-height: 30px;
     text-decoration: none;
     display: block;
     padding-left: 10px;
@@ -125,12 +128,15 @@ li:hover {
     text-decoration: none;
     color: #000000;
     background-color: #33B5E5;
+    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+
 }
 
 .box {
 	border-radius: 5px;
 	box-shadow: 0 8px 30px -6px #39474E;
 	margin: 0 5%;
+	font-size: 15px;
 }
 
 
@@ -141,29 +147,38 @@ li:hover {
 }
 
 .repoList {
-	word-wrap: normal;
 	font-family: monospace;
 	font-size: 17px;
 	padding:0 0 10px 10px;
-	width: 100%;
+	width: 90%;
 	color: #39474E;
 	margin: auto;
 	text-align: left;
 	border-radius: 10px;
 	margin-bottom: 5px;
 	box-shadow: 0 8px 30px -6px #39474E;
+}
 
+a {
+	text-decoration: none;
 }
 
 
-.animate-area	{ 
+/*.animate-area	{ 
 	background-image: url(twitter-logo-bird.png), url(treehouseFrog.png), url(bg-clouds.png);
 	background-position: 20px -90px, 30px 80px, 0px 0px;
 	background-repeat: no-repeat, no-repeat, repeat-x;
 }
 
-
-
+@keyframes animatedBird {
+	from { background-position: 20px 20px, 30px 80px, 0 0; }
+	to { background-position: 300px -90px, 30px 20px, 100% 0; }
+}
+		
+.animate-area	{ 
+	animation: animatedBird 4s linear infinite;
+}
+*/
 
 @media screen and (max-width: 450px) {
 
