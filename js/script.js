@@ -108,7 +108,7 @@ var newSearch = function(keyEvent) {
         var userLookupVal = inputEl.value
             // console.log(inputEl.value)
         // console.log(userLookupVal)
-        location.hash = userLookupVal
+        location.hash = userLookupVal.replace(/\s+/g, '')
         inputEl.value = ''
     
 	    var searchURL = 'https://api.github.com/users/'
