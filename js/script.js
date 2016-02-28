@@ -50,7 +50,7 @@ var handleDataRepos = function(jasonDataRepo) {
     console.log([jasonDataRepo])
     var domRepoString = ''
     for (var i = 0; i < jasonDataRepo.length; i++) {
-        domRepoString += '<a href="'+jasonDataRepo[i].html_url+'"><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>Number Of Open Issues:     ' + jasonDataRepo[i].open_issues_count + '</div></a>'
+        domRepoString += '<a href="'+jasonDataRepo[i].html_url+'"target="_blank"><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>Number Of Open Issues:     ' + jasonDataRepo[i].open_issues_count + '</div></a>'
     }
     var repoContainer = document.querySelector('.right')
     repoContainer.innerHTML = domRepoString
