@@ -1,14 +1,18 @@
 console.log($)
 
 // var apiKey = '?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93'
-var profileURL = 'https://api.github.com/users/'
-var reposURL = 'https://api.github.com/users/'
+var baseURL = 'https://api.github.com/users/'
 var userProfile = 'matthiasak'
 var userRepo = userProfile + '/repos' 
-
-var promiseProfile = $.getJSON(profileURL + userProfile)
-var promiseRepos = $.getJSON(reposURL + userRepo)
 var inputEl = document.querySelector("input")
+
+
+function ironGitPromise(inputURL) {
+    return $.getJSON(inputURL)
+}
+
+var gitPromise = $.getJSON(baseURL + userProfile)
+var promiseRepos = $.getJSON(baseURL + userRepo)
 var userInput = inputEl.value
 
 
@@ -17,8 +21,7 @@ var controller = function() {
 	doRequest(query) 
 }
 
-// turns an object (a collection of key-value pairs, right?) into a parameter
-	// string of the form key1=value1&key2=value2&key3=value3 etc etc.
+
 var formatURLparams = function(paramsObj) {
     var paramString = ''
  	for (var aKey in paramsObj) {
@@ -44,10 +47,10 @@ var handleDataProfile = function(jsonProfileData) {
 // Repos Data Function & sending to DOM
 
 var handleDataRepos = function(jasonDataRepo) {
-    // console.log([jasonDataRepo])
+    console.log([jasonDataRepo])
     var domRepoString = ''
     for (var i = 0; i < jasonDataRepo.length; i++) {
-        domRepoString += '<a href="jasonDataRepo[i].url"><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>Number Of Open Issues:     ' + jasonDataRepo[i].open_issues_count + '</div></a>'
+        domRepoString += '<a href="'+jasonDataRepo[i].html_url+'"><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>Number Of Open Issues:     ' + jasonDataRepo[i].open_issues_count + '</div></a>'
     }
     var repoContainer = document.querySelector('.right')
     repoContainer.innerHTML = domRepoString
@@ -68,7 +71,6 @@ var profileToHTML = function(profileObject) {
     var location = profileObject.location
     if (bio === null) bio = ''
     if (hire === true) hire = 'available for employment'
-    console.log(profileObject.hireable)
 
     var newProfileToDom = '<img class="profilePic" src="' + avatarImgSrc + '">'
     newProfileToDom += '<ul class="profileListContainer"><li class="profileName"><h3>' + name + '</h3></li>'
@@ -90,10 +92,10 @@ var doRequest = function(query) {
 	var params = {
 		q: query
 	}
-	var fullURL = profileURL + formatURLparams(params)
-	console.log(fullURL)
+	var fullURL = baseURL + formatURLparams(params)
+	// console.log(fullURL)
 	var promise = $.getJSON(fullURL)
-	promise.then(handleResponse)
+	promise.then(handleDataProfile)
 }
 
 
@@ -106,16 +108,16 @@ var newSearch = function(keyEvent) {
         var userLookupVal = inputEl.value
             // console.log(inputEl.value)
         // console.log(userLookupVal)
-        location.hash = "search/" + userLookupVal
+        location.hash = userLookupVal
         inputEl.value = ''
     
 	    var searchURL = 'https://api.github.com/users/'
-	    var profileURL = searchURL + userLookupVal
+	    var baseURL = searchURL + userLookupVal
 	    var repoURL = searchURL + userLookupVal + '/repos'
 
-	    var promiseProfile = $.getJSON(profileURL)
+	    var gitPromise = $.getJSON(baseURL)
 	    var promiseRepos = $.getJSON(repoURL)
-	    promiseProfile.then(handleDataProfile)
+	    gitPromise.then(handleDataProfile)
 	    promiseRepos.then(handleDataRepos)
 	        // console.log([handleDataProfileSearch])
 	        // console.log([handleDataReposSearch])
@@ -124,7 +126,7 @@ var newSearch = function(keyEvent) {
 
 inputEl.addEventListener('keydown', newSearch)
 
-promiseProfile.then(handleDataProfile)
+gitPromise.then(handleDataProfile)
 promiseRepos.then(handleDataRepos)
 
 doRequest(location.hash.substr(1))
