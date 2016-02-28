@@ -12,6 +12,23 @@ var inputEl = document.querySelector("input")
 var userInput = inputEl.value
 
 
+var controller = function() {
+	var hash = location.hash.substr(1)
+	doRequest(query) 
+}
+
+// turns an object (a collection of key-value pairs, right?) into a parameter
+	// string of the form key1=value1&key2=value2&key3=value3 etc etc.
+var formatURLparams = function(paramsObj) {
+    var paramString = ''
+ 	for (var aKey in paramsObj) {
+        var val = paramsObj[aKey]
+        paramString += "&" + aKey + "=" + paramsObj[aKey]
+    }
+    return paramString.substr(1)
+}
+
+
 //Profile Data Function
 
 var handleDataProfile = function(jsonProfileData) {
@@ -64,6 +81,22 @@ var profileToHTML = function(profileObject) {
     return newProfileToDom
 }
 
+
+
+// Do Request
+
+var doRequest = function(query) {
+	console.log(query)
+	var params = {
+		q: query
+	}
+	var fullURL = profileURL + formatURLparams(params)
+	console.log(fullURL)
+	var promise = $.getJSON(fullURL)
+	promise.then(handleResponse)
+}
+
+
 // search function
 
 var newSearch = function(keyEvent) {
@@ -73,12 +106,12 @@ var newSearch = function(keyEvent) {
         var userLookupVal = inputEl.value
             // console.log(inputEl.value)
         // console.log(userLookupVal)
-        
+        location.hash = "search/" + userLookupVal
         inputEl.value = ''
     
 	    var searchURL = 'https://api.github.com/users/'
-	    var profileURL = searchURL + userLookupVal + apiKey
-	    var repoURL = searchURL + userLookupVal + '/repos' + apiKey
+	    var profileURL = searchURL + userLookupVal
+	    var repoURL = searchURL + userLookupVal + '/repos'
 
 	    var promiseProfile = $.getJSON(profileURL)
 	    var promiseRepos = $.getJSON(repoURL)
@@ -89,37 +122,9 @@ var newSearch = function(keyEvent) {
 	}
 }
 
-
-
-
-// var newSearch = function(keyEvent) {
-//   var targetEl = keyEvent.target
-//   // console.log(targetEl)
-
-//   if (keyEvent.keyCode === 13) {
-//       numberOfZip = inputEl.value
-//       zipper = parseInt(numberOfZip) + '&apikey='
-// 	  pathName = baseUrl + 'zip=' +zipper + apiKey
-// 	  var promise = $.getJSON(pathName)
-// 	  console.log(promise)
-// 	  promise.then(handleData)
-// 	  // function that refreshes the page with the pat
-
-//   }
-// }
-
-// inputEl.addEventListener('keydown',addItem)
-
-
-
-
-
-
-
-
-
-
 inputEl.addEventListener('keydown', newSearch)
 
 promiseProfile.then(handleDataProfile)
 promiseRepos.then(handleDataRepos)
+
+doRequest(location.hash.substr(1))
