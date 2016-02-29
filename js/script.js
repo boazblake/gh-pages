@@ -1,6 +1,6 @@
 console.log($)
 
-// var apiKey = '?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93'
+var apiKey = '?access_token=0a0354a66ccbc353d830011d91f3f4556279ce07'
 var baseURL = 'https://api.github.com/users/'
 var userProfile = 'boazblake'
 var userRepo = userProfile + '/repos' 
@@ -24,19 +24,16 @@ var _formatURLparams = function(paramsObj) {
 
 function _gitUserURL(userName) {
 
-    return baseURL + userName //+ apiKey
+    return baseURL + userName + apiKey
     //=> https://api.github.com/users/blakeboaz?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93
 }
 
 function _gitUserRepoURL(userName){
 
-    return baseURL + userName + '/repos'// + apiKey
+    return baseURL + userName + '/repos' + apiKey
     //=> https://api.github.com/users/blakeboaz/repos?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93
 }
 
-var controller = function() {
-	var hash = location.hash.substr(1)
-}
 
 //Profile Data Function
 
@@ -101,7 +98,7 @@ var newSearch = function(keyEvent) {
 
 inputEl.addEventListener('keydown', newSearch)
 
-var handleHashChange = function (evt) {
+var controller = function (hashEvent) {
      // console.log(window.location.hash)
     var userLookupVal = (window.location.hash).substr(1)
 
@@ -114,9 +111,9 @@ var handleHashChange = function (evt) {
 }
 
 // webApp initialization (first thing that happens on loading page)
-console.log(window.location.hash)
+// console.log(window.location.hash)
 if (window.location.hash) {
-    handleHashChange()
+    controller()
 } else {
     var userURL = _gitUserURL('boazblake')
     var repoURL = _gitUserRepoURL('boazblake')
@@ -124,4 +121,4 @@ if (window.location.hash) {
     makeAndReturnPromise( repoURL ).then(handleDataRepos)
 }
 
-window.addEventListener('hashchange', handleHashChange)
+window.addEventListener('hashchange', controller)
