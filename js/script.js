@@ -1,6 +1,6 @@
 console.log($)
 
-var apiKey = '?access_token=0a0354a66ccbc353d830011d91f3f4556279ce07'
+// var apiKey = '?access_token=0a0354a66ccbc353d830011d91f3f4556279ce07'
 var baseURL = 'https://api.github.com/users/'
 var userProfile = 'boazblake'
 var userRepo = userProfile + '/repos' 
@@ -24,13 +24,13 @@ var _formatURLparams = function(paramsObj) {
 
 function _gitUserURL(userName) {
 
-    return baseURL + userName + apiKey
+    return baseURL + userName //+ apiKey
     //=> https://api.github.com/users/blakeboaz?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93
 }
 
 function _gitUserRepoURL(userName){
 
-    return baseURL + userName + '/repos' + apiKey
+    return baseURL + userName + '/repos' //+ apiKey
     //=> https://api.github.com/users/blakeboaz/repos?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93
 }
 
