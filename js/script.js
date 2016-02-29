@@ -2,35 +2,41 @@ console.log($)
 
 // var apiKey = '?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93'
 var baseURL = 'https://api.github.com/users/'
-var userProfile = 'matthiasak'
+var userProfile = 'boazblake'
 var userRepo = userProfile + '/repos' 
 var inputEl = document.querySelector("input")
 
+function makeAndReturnPromise(inputURL, paramsObj) {
+    var formattedParams = ''
+    if( paramsObj ) {formattedParams = _formatURLParams(paramsObj) }
 
-function ironGitPromise(inputURL) {
-    return $.getJSON(inputURL)
+    return $.getJSON(inputURL + formattedParams )
 }
 
-var gitPromise = $.getJSON(baseURL + userProfile)
-var promiseRepos = $.getJSON(baseURL + userRepo)
-var userInput = inputEl.value
+var _formatURLparams = function(paramsObj) {
+   var paramString = ''
+   for (var aKey in paramsObj) {
+       var val = paramsObj[aKey]
+       paramString += "&" + aKey + "=" + paramsObj[aKey]
+   }
+   return paramString.substr(1)
+}
 
+function _gitUserURL(userName) {
+
+    return baseURL + userName //+ apiKey
+    //=> https://api.github.com/users/blakeboaz?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93
+}
+
+function _gitUserRepoURL(userName){
+
+    return baseURL + userName + '/repos'// + apiKey
+    //=> https://api.github.com/users/blakeboaz/repos?access_token=4ec879e96a1415c2f5efcea69f2b7664edb30f93
+}
 
 var controller = function() {
 	var hash = location.hash.substr(1)
-	doRequest(query) 
 }
-
-
-var formatURLparams = function(paramsObj) {
-    var paramString = ''
- 	for (var aKey in paramsObj) {
-        var val = paramsObj[aKey]
-        paramString += "&" + aKey + "=" + paramsObj[aKey]
-    }
-    return paramString.substr(1)
-}
-
 
 //Profile Data Function
 
@@ -41,21 +47,6 @@ var handleDataProfile = function(jsonProfileData) {
     domPRofileString += profileToHTML(profileObject)
     var profileContainer = document.querySelector('.left')
     profileContainer.innerHTML = domPRofileString
-
-}
-
-// Repos Data Function & sending to DOM
-
-var handleDataRepos = function(jasonDataRepo) {
-    console.log([jasonDataRepo])
-    var domRepoString = ''
-    for (var i = 0; i < jasonDataRepo.length; i++) {
-        domRepoString += '<a href="'+jasonDataRepo[i].html_url+'"target="_blank"><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>Number Of Open Issues:     ' + jasonDataRepo[i].open_issues_count + '</div></a>'
-    }
-    var repoContainer = document.querySelector('.right')
-    repoContainer.innerHTML = domRepoString
-        // console.log()
-
 }
 
 //Profile Data to DOM
@@ -83,50 +74,54 @@ var profileToHTML = function(profileObject) {
     return newProfileToDom
 }
 
+// Repos Data Function & sending to DOM
 
+var handleDataRepos = function(jasonDataRepo) {
+    console.log([jasonDataRepo])
+    var domRepoString = ''
+    for (var i = 0; i < jasonDataRepo.length; i++) {
+        domRepoString += '<a href="'+jasonDataRepo[i].html_url+'"target="_blank"><div class="repoList"> <h4>Repo Name:     ' + jasonDataRepo[i].name + '</h2><br>Number Of Open Issues:     ' + jasonDataRepo[i].open_issues_count + '</div></a>'
+    }
+    var repoContainer = document.querySelector('.right')
+    repoContainer.innerHTML = domRepoString
+        // console.log()
 
-// Do Request
-
-var doRequest = function(query) {
-	console.log(query)
-	var params = {
-		q: query
-	}
-	var fullURL = baseURL + formatURLparams(params)
-	// console.log(fullURL)
-	var promise = $.getJSON(fullURL)
-	promise.then(handleDataProfile)
 }
-
-
-// search function
 
 var newSearch = function(keyEvent) {
     var inputEl = keyEvent.target
 
     if (keyEvent.keyCode === 13) {
         var userLookupVal = inputEl.value
-            // console.log(inputEl.value)
-        // console.log(userLookupVal)
-        location.hash = userLookupVal.replace(/\s+/g, '')
         inputEl.value = ''
-    
-	    var searchURL = 'https://api.github.com/users/'
-	    var baseURL = searchURL + userLookupVal
-	    var repoURL = searchURL + userLookupVal + '/repos'
+        window.location.hash = userLookupVal
 
-	    var gitPromise = $.getJSON(baseURL)
-	    var promiseRepos = $.getJSON(repoURL)
-	    gitPromise.then(handleDataProfile)
-	    promiseRepos.then(handleDataRepos)
-	        // console.log([handleDataProfileSearch])
-	        // console.log([handleDataReposSearch])
 	}
 }
 
 inputEl.addEventListener('keydown', newSearch)
 
-gitPromise.then(handleDataProfile)
-promiseRepos.then(handleDataRepos)
+var handleHashChange = function (evt) {
+     // console.log(window.location.hash)
+    var userLookupVal = (window.location.hash).substr(1)
 
-doRequest(location.hash.substr(1))
+    var userGH_URL = _gitUserURL(userLookupVal)
+    var userGhRepoURL = _gitUserRepoURL(userLookupVal)
+
+    makeAndReturnPromise(userGH_URL).then(handleDataProfile)
+    makeAndReturnPromise(userGhRepoURL).then(handleDataRepos)
+
+}
+
+// webApp initialization (first thing that happens on loading page)
+console.log(window.location.hash)
+if (window.location.hash) {
+    handleHashChange()
+} else {
+    var userURL = _gitUserURL('boazblake')
+    var repoURL = _gitUserRepoURL('boazblake')
+    makeAndReturnPromise( userURL ).then(handleDataProfile)
+    makeAndReturnPromise( repoURL ).then(handleDataRepos)
+}
+
+window.addEventListener('hashchange', handleHashChange)
