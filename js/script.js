@@ -109,8 +109,10 @@ var controller = function (hashEvent) {
     makeAndReturnPromise(userGhRepoURL).then(handleDataRepos)
 
 }
-
-// webApp initialization (first thing that happens on loading page)
+ ///////////////////////////
+// webApp initialization.
+// The first thing that happens on loading page is initiatied by (117 in conjuncture with 126 --- Ty Travis H.) Due to the script having both the window.location.hash resolving as a boolean response of 'true' (117) AND the Window (126) 'hashchange'  evventlistner activated capturing any eventualaity and passing to the conroller (defined above). Otherwise, the helper functions which resolve into the user and repo URLs and subsequently defined into thier own variables (120-121) and then called  (122&123) by the jQuery promise-calling-method which involved the actual making and returning function (defined above) having the '.then' method (defined above l.40) resolving () applied which 
+//////////////////////////////////
 // console.log(window.location.hash)
 if (window.location.hash) {
     controller()
